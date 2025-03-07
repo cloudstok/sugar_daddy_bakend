@@ -66,7 +66,7 @@ const prepareDataForWebhook = async(betObj, key, socket)=> {
         }
         switch (key) {
             case "DEBIT":
-                obj.description = `${obj.amount} debited for Helix game for Round ${lobby_id}`;
+                obj.description = `${obj.amount} debited for Sugar Daddy game for Round ${lobby_id}`;
                 obj.bet_id = bet_id;
                 obj.socket_id = socket_id;
                 obj.txn_type = 0;
@@ -74,7 +74,7 @@ const prepareDataForWebhook = async(betObj, key, socket)=> {
             case "CREDIT":
                 obj.amount = final_amount;
                 obj.txn_ref_id = webhookData.txn_id;
-                obj.description = `${final_amount} credited for Helix game for Round ${lobby_id}`;
+                obj.description = `${final_amount} credited for Sugar Daddy game for Round ${lobby_id}`;
                 obj.txn_type = 1;
                 break;
             default:

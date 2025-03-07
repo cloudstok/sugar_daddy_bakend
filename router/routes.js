@@ -1,7 +1,7 @@
 const routes = require('express').Router()
 
 routes.get('/', async (req, res) => {
-    res.send({ "msg": "Helix game server is up and running👍" })
+    res.send({ "msg": "Sugar Daddy game server is up and running👍" })
 });
 
 

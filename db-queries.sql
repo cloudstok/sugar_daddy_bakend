@@ -1,7 +1,6 @@
-
-DROP DATABASE if EXISTS `helix_db_stage`;
-CREATE DATABASE IF NOT EXISTS `helix_db_stage`;
-use `helix_db_stage`;
+DROP DATABASE if EXISTS `sugar_daddy_db`;
+CREATE DATABASE IF NOT EXISTS `sugar_daddy_db`;
+use `sugar_daddy_db`;
 
  CREATE TABLE IF NOT EXISTS `settlement`(
    `settlement_id` int NOT NULL AUTO_INCREMENT,
@@ -70,11 +69,11 @@ create index user_id_index on settlement (bet_id);
 create index session_toke_index on settlement (user_id);
 
 
---INDEX QUERIES
-ALTER TABLE `helix_db_stage`.`bets` ADD INDEX `lobby_id_index` (`lobby_id` ASC)VISIBLE, ADD INDEX `operator_id_index` (`operator_id` ASC) VISIBLE, ADD INDEX `bet_amount_index` (`bet_amount` ASC) VISIBLE, ADD INDEX `created_at_index` (`created_at` ASC) VISIBLE;
-ALTER TABLE `helix_db_stage`.`round_stats` ADD INDEX `lobby_id_index` (`lobby_id` ASC) VISIBLE, ADD INDEX `max_mult_index` (`max_mult` ASC) VISIBLE, ADD INDEX `created_at_index` (`created_at` ASC) VISIBLE;
-ALTER TABLE `helix_db_stage`.`settlement` ADD INDEX `lobby_id_index` (`lobby_id` ASC) INVISIBLE,ADD INDEX `bet_amount_index` (`bet_amount` ASC) INVISIBLE, ADD INDEX `max_mult_index` (`max_mult` ASC) VISIBLE;
+-- INDEX QUERIES
+ALTER TABLE `sugar_daddy_db`.`bets` ADD INDEX `lobby_id_index` (`lobby_id` ASC)VISIBLE, ADD INDEX `operator_id_index` (`operator_id` ASC) VISIBLE, ADD INDEX `bet_amount_index` (`bet_amount` ASC) VISIBLE, ADD INDEX `created_at_index` (`created_at` ASC) VISIBLE;
+ALTER TABLE `sugar_daddy_db`.`round_stats` ADD INDEX `lobby_id_index` (`lobby_id` ASC) VISIBLE, ADD INDEX `max_mult_index` (`max_mult` ASC) VISIBLE, ADD INDEX `created_at_index` (`created_at` ASC) VISIBLE;
+ALTER TABLE `sugar_daddy_db`.`settlement` ADD INDEX `lobby_id_index` (`lobby_id` ASC) INVISIBLE,ADD INDEX `bet_amount_index` (`bet_amount` ASC) INVISIBLE, ADD INDEX `max_mult_index` (`max_mult` ASC) VISIBLE;
 
 
-ALTER TABLE `helix_db_stage`.`bets` ADD COLUMN `auto_cashout` DECIMAL(10, 2) NULL DEFAULT NULL AFTER `bet_amount`;
-ALTER TABLE `helix_db_stage`.`settlement` ADD COLUMN `auto_cashout` DECIMAL(10, 2) NULL DEFAULT NULL AFTER `bet_amount`;
+ALTER TABLE `sugar_daddy_db`.`bets` ADD COLUMN `auto_cashout` DECIMAL(10, 2) NULL DEFAULT NULL AFTER `bet_amount`;
+ALTER TABLE `sugar_daddy_db`.`settlement` ADD COLUMN `auto_cashout` DECIMAL(10, 2) NULL DEFAULT NULL AFTER `bet_amount`;
