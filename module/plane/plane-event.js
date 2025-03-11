@@ -91,7 +91,7 @@ const initLobby = async (io) => {
         else {
             init_val = init_val * 1.005;
         }
-        
+
         recurLobbyData['ongoingMaxMult'] = init_val.toFixed(2);
         setCurrentLobby(recurLobbyData);
         await sleep(100)
@@ -104,7 +104,7 @@ const initLobby = async (io) => {
         if (y == 1) {
             await settleBet(io, odds)
         }
-        io.emit("plane", `${lobbyId}:${max_mult.toFixed(2)}:2`);
+        io.emit("plane", `${lobbyId}:${y}-${init_val.toFixed(2)}:2`);
         await sleep(1000);
     }
     odds = {}
@@ -139,14 +139,17 @@ const getMaxMultOdds = async (io) => {
 
 const RTP = 9200;// Return to player 97.00%
 
-
 function generateOdds() {
     const win_per = (Math.random() * 99.00);
     let mult = (RTP) / (win_per * 100)
     if (mult < 1.01) {
         mult = 1.00
     }
-    else if (mult > 100000) {
+    else if(mult > 20) {
+        const highMultRng = (Math.random());
+        if(highMultRng < 0.3) mult = generateOdds().mult;
+    }
+    else if (mult > 100000){
         mult = 100000;
     }
     return ({ win_per, mult });
