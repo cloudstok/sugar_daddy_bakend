@@ -55,7 +55,9 @@ const initLobby = async (io) => {
     let inc = 1
     const end_delay = 6;
     odds.total_players = await getPlayerCount();
-    const max_mult = generateOdds().mult;
+   const max_mult = generateOdds().mult;
+
+//    const max_mult = 20;
 
 
     for (let x = 0; x < start_delay; x++) {
@@ -104,7 +106,7 @@ const initLobby = async (io) => {
         if (y == 1) {
             await settleBet(io, odds)
         }
-        io.emit("plane", `${lobbyId}:${y}-${init_val.toFixed(2)}:2`);
+        io.emit("plane", `${lobbyId}:${y}-${max_mult.toFixed(2)}:2`);
         await sleep(1000);
     }
     odds = {}
