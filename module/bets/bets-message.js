@@ -138,7 +138,7 @@ const removeBetObjAndEmit = async (bet_id, bet_amount, user_id, operator_id, soc
             await setCache(`${operator_id}:${user_id}`, JSON.stringify(userData));
             io.to(socket_id).emit("info", userData);
         }
-        failedBetsLogger.error(JSON.stringify({ req: bet_id, res: 'bets cancelled by upstream' }));
+        failedBetsLogger.error(JSON.stringify({ req: bet_id, res: 'Bet Cancelled By Upstream' }));
     } catch (err) {
         console.error(`[ERR] while removing bet from betObj is::`, err);
     } finally {
@@ -186,7 +186,7 @@ const handleFulfilledResult = async (value, io) => {
             await insertBets(value);
         } else {
             io.to(socket_id).emit("bet", { bet_id: bet_id, action: "cancel" });
-            io.to(socket_id).emit("betError", `bets cancelled by upstream ${bet_id}`);
+            io.to(socket_id).emit("betError", `Bet Cancelled By Upstream ${bet_id}`);
             await removeBetObjAndEmit(bet_id, bet_amount, user_id, operator_id, socket_id, io);
         }
     } catch (err) {
@@ -207,7 +207,7 @@ const handleRejectedResult = async (reason, io) => {
             io.to(socket_id).emit("logout", "user logout");
         }
         await removeBetObjAndEmit(bet_id, bet_amount, user_id, operator_id, socket_id, io);
-        io.to(socket_id).emit("betError", "bets cancelled by upstream");
+        io.to(socket_id).emit("betError", "Bet Cancelled By Upstream");
     } catch (er) {
         console.error(er);
     }
