@@ -57,7 +57,7 @@ const initLobby = async (io) => {
     odds.start_time = Date.now();
     const start_delay = 7;
     let inc = 1
-    const end_delay = 6;
+    const end_delay = 7;
     odds.total_players = await getPlayerCount();
    const max_mult = generateOdds().mult;
 
@@ -106,8 +106,8 @@ const initLobby = async (io) => {
 
     recurLobbyData['status'] = 2;
     setCurrentLobby(recurLobbyData);
-    for (let y = 0; y < end_delay; y++) {
-        if (y == 1) {
+    for (let y = 1; y < end_delay; y++) {
+        if (y == 2) {
             await settleBet(io, odds)
         }
         io.emit("plane", `${lobbyId}:${y}-${max_mult.toFixed(2)}:2`);
