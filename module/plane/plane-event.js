@@ -37,11 +37,15 @@ const initPlane = async (io) => {
 }
 
 let odds = {};
+let betCount = 0;
 
 function getRandomBetCount() {
-    return Math.floor(Math.random() * (3000 - 600 + 1)) + 600;
+    betCount = Math.floor(Math.random() * (3000 - 600 + 1)) + 600;
+    return betCount
 }
+
 const getLobbiesMult = () => lobbiesMult;
+const getBetCount = () => betCount;
 
 const initLobby = async (io) => {
     const lobbyId = Date.now();
@@ -57,7 +61,7 @@ const initLobby = async (io) => {
     odds.total_players = await getPlayerCount();
    const max_mult = generateOdds().mult;
 
-//    const max_mult = 20;
+//    const max_mult = 50;
 
 
     for (let x = 0; x < start_delay; x++) {
@@ -157,4 +161,4 @@ function generateOdds() {
     return ({ win_per, mult });
 }
 
-module.exports = { initPlane, getLobbiesMult }
+module.exports = { initPlane, getLobbiesMult, getBetCount }
