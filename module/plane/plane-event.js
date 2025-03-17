@@ -134,16 +134,7 @@ const getMaxMultOdds = async (io) => {
     }
 }
 
-
-
-
-
-
-
-//---------------------------
-// const fs = require('fs');
-
-const RTP = 9200;// Return to player 97.00%
+const RTP = 9400;// Return to player 97.00%
 
 function generateOdds() {
     const win_per = (Math.random() * 99.00);
@@ -151,11 +142,11 @@ function generateOdds() {
     if (mult < 1.01) {
         mult = 1.00
     }
-    else if(mult > 20) {
+    else if (mult > 20) {
         const highMultRng = (Math.random());
-        if(highMultRng < 0.3) mult = generateOdds().mult;
+        if (highMultRng < 0.3) mult = generateOdds().mult;
     }
-    else if (mult > 100000){
+    else if (mult > 100000) {
         mult = 100000;
     }
     return ({ win_per, mult });

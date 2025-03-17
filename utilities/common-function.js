@@ -18,34 +18,32 @@ function generateUUIDv7() {
     return uuid.join('-');
 }
 
-
 const postDataToSourceForBet = async (data) => {
+    let { webhookData, token, socket_id, bet_id } = data;
     try {
-            let { webhookData, token, socket_id, bet_id } = data;
-            const url = process.env.service_base_url;
-            let clientServerOptions = {
-                method: 'POST',
-                url: `${url}/service/operator/user/balance/v2`,
-                headers: {
-                    token
-                },
-                data: webhookData,
-                timeout: 1000 * 5
-            };
-            try{
-                const result = await axios(clientServerOptions);
-                return { status: result.status, ...data }
-            }catch(err){
-                console.log(`[ERR] received from upstream server`, err?.response?.status);
-                let response = err.response ? err.response?.data : err?.response?.status;
-                failedLogger.error(JSON.stringify({ req: { webhookData, token, socket_id, bet_id }, res: response}));
-             
-                return { response, token, socket_id, bet_id };
-            };
+        const url = process.env.service_base_url;
+        let clientServerOptions = {
+            method: 'POST',
+            url: `${url}/service/operator/user/balance/v2`,
+            headers: {
+                token
+            },
+            data: webhookData,
+            timeout: 1000 * 5
+        };
+        try {
+            const result = await axios(clientServerOptions);
+            return { status: result.status, ...data }
+        } catch (err) {
+            console.log(`[ERR] received from upstream server`, err?.response?.status);
+            let response = err.response ? err.response?.data : err?.response?.status;
+            failedLogger.error(JSON.stringify({ req: { webhookData, token, socket_id, bet_id }, res: response }));
+            return { response, token, socket_id, bet_id };
+        };
     } catch (err) {
         console.error(`[ERR] while posting data to source is:::`, err);
-        failedLogger.error(JSON.stringify({ req: data, res: `Something went wrong`}));
-        return false
+        failedLogger.error(JSON.stringify({ req: data, res: `Something went wrong` }));
+        return { response:{}, token, socket_id, bet_id };
     }
 }
 
