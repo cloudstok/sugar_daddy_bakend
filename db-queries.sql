@@ -77,3 +77,4 @@ ALTER TABLE `sugar_daddy_db`.`settlement` ADD INDEX `lobby_id_index` (`lobby_id`
 
 ALTER TABLE `sugar_daddy_db`.`bets` ADD COLUMN `auto_cashout` DECIMAL(10, 2) NULL DEFAULT NULL AFTER `bet_amount`;
 ALTER TABLE `sugar_daddy_db`.`settlement` ADD COLUMN `auto_cashout` DECIMAL(10, 2) NULL DEFAULT NULL AFTER `bet_amount`;
+ALTER TABLE settlement ADD COLUMN `win_amount` decimal(10, 2) default 0.00 after `max_mult`;

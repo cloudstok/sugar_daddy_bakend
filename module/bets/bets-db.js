@@ -1,14 +1,14 @@
 const { write } = require('../../utilities/db-connection');
 
-const SQL_CASHOUT = "INSERT INTO settlement(bet_id, lobby_id, user_id ,operator_id, name, bet_amount, auto_cashout, balance, avatar, max_mult, status) VALUES(?,?,?,?,?,?,?,?,?,?,?)"
+const SQL_CASHOUT = "INSERT INTO settlement(bet_id, lobby_id, user_id ,operator_id, name, bet_amount, auto_cashout, balance, avatar, max_mult, win_amount, status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)"
 const SQL_ROUND_STATS = "INSERT INTO round_stats (lobby_id, start_time, total_players , max_mult, end_time, total_bets, total_bet_amount, total_cashout_amount, biggest_winner, biggest_looser, total_round_settled)VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 const SQL_INSERT_BETS = 'INSERT INTO bets (bet_id, lobby_id, user_id, operator_id, name, balance, avatar, bet_amount, auto_cashout) VALUES(?,?,?,?,?,?,?,?,?)';
 
 const addCashout = async (data) => {
     try {
-        const { name, balance, avatar, lobby_id, bet_amount, user_id, operator_id, max_mult, bet_id, maxAutoCashout } = data;
+        const { name, balance, avatar, lobby_id, bet_amount, user_id, operator_id, max_mult, bet_id, maxAutoCashout, final_amount } = data;
         const autoCashout = maxAutoCashout === 'null' ? null : maxAutoCashout;
-        await write(SQL_CASHOUT, [bet_id, lobby_id, decodeURIComponent(user_id), operator_id, name, bet_amount, autoCashout, balance, avatar, max_mult, "cashout"])
+        await write(SQL_CASHOUT, [bet_id, lobby_id, decodeURIComponent(user_id), operator_id, name, bet_amount, autoCashout, balance, avatar, max_mult, final_amount, "cashout"])
         console.info("Cashout Data Inserted Successfully")
     } catch (er) {
         console.error(er);
