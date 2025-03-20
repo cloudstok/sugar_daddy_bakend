@@ -144,7 +144,7 @@ function generateOdds() {
     }
     else if (mult > 20) {
         const highMultRng = (Math.random());
-        if (highMultRng < 0.3) mult = generateOdds().mult;
+        if (highMultRng < 0.5) mult = generateOdds().mult;
     }
     else if (mult > 100000) {
         mult = 100000;
